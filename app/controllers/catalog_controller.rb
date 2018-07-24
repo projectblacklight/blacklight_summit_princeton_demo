@@ -120,7 +120,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'language_facet', label: 'Language'
     config.add_show_field 'published_display', label: 'Published'
     config.add_show_field 'published_vern_display', label: 'Published'
-    config.add_show_field 'isbn_t', label: 'ISBN'
+    config.add_show_field 'isbn_t', label: 'ISBN', helper_method: :custom_modal
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -193,4 +193,9 @@ class CatalogController < ApplicationController
     config.autocomplete_enabled = true
     config.autocomplete_path = 'suggest'
   end
+
+  def custom_modal
+    render layout: !request.xhr?
+  end
+
 end

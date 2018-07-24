@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+    get "custom_modal"
   end
 
   concern :exportable, Blacklight::Routes::Exportable.new
