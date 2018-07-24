@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  
+
   Blacklight::Marc.add_routes(self)
   mount Blacklight::Engine => '/'
   root to: "catalog#index"
     concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+    concerns :searchable
+    get "custom_modal"
+  end
+
+  resource :microsearch, only: [:index], as: 'microsearch', path: '/microsearch', controller: 'microsearch' do
     concerns :searchable
     get "custom_modal"
   end
